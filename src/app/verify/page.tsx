@@ -1,10 +1,12 @@
-'use client'
-import React, { useRef, ChangeEvent, KeyboardEvent } from 'react'
-import { useRouter } from 'next/navigation'
+import React, { useRef, ChangeEvent, KeyboardEvent } from 'react';
+import { useRouter } from 'next/navigation';
 
 const Verify = () => {
   const router = useRouter();
-  const inputRefs = Array.from({ length: 8 }, () => useRef<HTMLInputElement>(null)); // Specify input element type
+  const inputRefs: React.RefObject<HTMLInputElement>[] = [];
+  for (let i = 0; i < 8; i++) {
+    inputRefs[i] = useRef<HTMLInputElement>(null);
+  }
 
   const handleInputChange = (index: number, e: ChangeEvent<HTMLInputElement>) => {
     const input = e.target;
@@ -18,10 +20,6 @@ const Verify = () => {
     }
   };
 
-  const handleKeyPress = (index: number, e: KeyboardEvent<HTMLInputElement>) => {
-    const input = e.target;
-
-  };
 
   return (
     <div className="border h-verify-height rounded-xl flex flex-col items-center w-signup-width mx-auto mt-8">
@@ -38,7 +36,6 @@ const Verify = () => {
               type="text"
               maxLength={1} // Limit input to one character
               onChange={(e) => handleInputChange(index, e)}
-              onKeyPress={(e) => handleKeyPress(index, e)}
             />
           ))}
         </div>
