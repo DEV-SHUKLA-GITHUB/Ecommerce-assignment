@@ -1,27 +1,27 @@
 'use client'
-import React, { useRef } from 'react'
+import React, { useRef, ChangeEvent, KeyboardEvent } from 'react'
 import { useRouter } from 'next/navigation'
 
 const Verify = () => {
   const router = useRouter();
-  const inputRefs = Array.from({ length: 8 }, () => useRef(null)); // Array of refs for 8 inputs
+  const inputRefs = Array.from({ length: 8 }, () => useRef<HTMLInputElement>(null)); // Specify input element type
 
-  const handleInputChange = (index, e) => {
+  const handleInputChange = (index: number, e: ChangeEvent<HTMLInputElement>) => {
     const input = e.target;
-    const maxLength = parseInt(input.getAttribute('maxlength'), 10);
+    const maxLength = parseInt(input.getAttribute('maxlength') || '1', 10); // Use default value if attribute is null
     const value = input.value;
 
     if (value.length >= maxLength) {
       // Move focus to the next input
-      if (index < inputRefs.length - 1) {
+      if (index < inputRefs.length - 1 && inputRefs[index + 1].current) {
         inputRefs[index + 1].current.focus();
       }
     }
   };
 
-  const handleKeyPress = (index, e) => {
+  const handleKeyPress = (index: number, e: KeyboardEvent<HTMLInputElement>) => {
     const input = e.target;
-    const maxLength = parseInt(input.getAttribute('maxlength'), 10);
+    const maxLength = parseInt(input.getAttribute('maxlength') || '1', 10); // Use default value if attribute is null
     const keyCode = e.keyCode || e.which;
 
     // Prevent typing more than one character per input
@@ -41,7 +41,7 @@ const Verify = () => {
             <input
               key={index}
               ref={ref}
-              className='w-verify-box-width h-12 mr-2 text-center border rounded-md'
+              className='w-verify-box-width h-12 mr-2 border rounded-md'
               type="text"
               maxLength={1} // Limit input to one character
               onChange={(e) => handleInputChange(index, e)}
