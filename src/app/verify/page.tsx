@@ -13,21 +13,15 @@ const Verify = () => {
 
     if (value.length >= maxLength) {
       // Move focus to the next input
-      if (index < inputRefs.length - 1 && inputRefs[index + 1].current) {
-        inputRefs[index + 1].current.focus();
+      if (index < inputRefs.length - 1 && inputRefs[index + 1]?.current) {
+        inputRefs[index + 1]?.current?.focus();
       }
     }
   };
 
   const handleKeyPress = (index: number, e: KeyboardEvent<HTMLInputElement>) => {
     const input = e.target;
-    const maxLength = parseInt(input.getAttribute('maxlength') || '1', 10); // Use default value if attribute is null
-    const keyCode = e.keyCode || e.which;
 
-    // Prevent typing more than one character per input
-    if (input.value.length >= maxLength && keyCode !== 8) {
-      e.preventDefault(); // Prevent further input
-    }
   };
 
   return (
@@ -41,7 +35,7 @@ const Verify = () => {
             <input
               key={index}
               ref={ref}
-              className='w-verify-box-width h-12 mr-2 border rounded-md'
+              className='w-verify-box-width h-12 mr-2 border text-center rounded-md'
               type="text"
               maxLength={1} // Limit input to one character
               onChange={(e) => handleInputChange(index, e)}
