@@ -2,8 +2,8 @@
 import React from 'react';
 
 const SignupForm = () => {
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = () => {
+    // e.preventDefault();
     // Handle form submission logic here
     console.log('Form submitted');
   };
