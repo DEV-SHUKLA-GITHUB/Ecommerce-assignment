@@ -1,6 +1,8 @@
+'use client'
 import React from 'react'
-
+import { useRouter } from 'next/navigation'
 const Login = () => {
+  const router = useRouter();
   return (
     <div className="border h-login-height rounded-xl flex flex-col items-center w-signup-width mx-auto mt-8">
         <h1 className='text-heading font-semibold text-center mt-8 mb-4'>Login</h1>
@@ -34,12 +36,13 @@ const Login = () => {
   <button
     type="submit"
     className="bg-black text-white text-center rounded-md text-tab font-medium my-8 w-sub-signup-width h-14"
+    onClick={()=>router.push('/home')}
   >
-    Create Account
+    Login
   </button>
   <hr className="border-gray-300 w-full mb-8" /> {/* Horizontal line */}
   <div className="mb-4 w-sub-signup-width text-center">
-    Have an account? <span className="font-medium">Login</span>
+    Don't Have an account? <span className="font-medium cursor-pointer" onClick={()=>router.push('/signup')}>Signup</span>
   </div>
 </div>
 

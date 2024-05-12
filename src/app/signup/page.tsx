@@ -1,15 +1,14 @@
 'use client'
 import React from 'react';
-
+import { useRouter } from 'next/navigation'
 const SignupForm = () => {
+  const router = useRouter();
   const handleSubmit = () => {
-    // e.preventDefault();
-    // Handle form submission logic here
-    console.log('Form submitted');
+    router.push('/verify');
+    
   };
   return (
-    <div className="border h-signup-height flex justify-center rounded-xl w-signup-width mx-auto mt-8">
-      <form className="px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
+    <div className="border h-signup-height flex flex-col items-center rounded-xl w-signup-width mx-auto mt-8">
         <h1 className='text-heading font-semibold text-center py-4'>Create your account</h1>
       <div className="mb-4 w-sub-signup-width my-4">
           <label htmlFor="name" className="">
@@ -50,13 +49,13 @@ const SignupForm = () => {
       <button
             type="submit"
             className="bg-black text-white text-center rounded-md text-tab font-medium  my-8 w-sub-signup-width h-14"
+            onClick={handleSubmit}
           >
             Create Account
           </button>
           <div className="mb-4 w-sub-signup-width text-center my-8">
-          Have an account ? <span className='font-medium'>Login</span>
+          Have an account ? <span className='font-medium cursor-pointer' onClick={()=>router.push('/login')}>Login</span>
         </div>
-      </form>
     </div>
   );
 };
