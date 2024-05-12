@@ -8,10 +8,9 @@ const Verify = () => {
 
   const handleInputChange = (index: number, e: ChangeEvent<HTMLInputElement>) => {
     const input = e.target;
-    const maxLength = parseInt(input.getAttribute('maxlength') || '1', 10); // Use default value if attribute is null
     const value = input.value;
 
-    if (value.length >= maxLength) {
+    if (value.length >= 1) {
       // Move focus to the next input
       if (index < inputRefs.length - 1 && inputRefs[index + 1]?.current) {
         inputRefs[index + 1]?.current?.focus();

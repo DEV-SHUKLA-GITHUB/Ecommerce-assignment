@@ -40,9 +40,9 @@ const Login = () => {
   >
     Login
   </button>
-  <hr className="border-gray-300 w-full mb-8" /> {/* Horizontal line */}
+  <hr className="border-gray-300 w-full mb-8" />
   <div className="mb-4 w-sub-signup-width text-center">
-    Don't Have an account? <span className="font-medium cursor-pointer" onClick={()=>router.push('/signup')}>Signup</span>
+    Dont Have an account? <span className="font-medium cursor-pointer" onClick={()=>router.push('/signup')}>Signup</span>
   </div>
 </div>
 
