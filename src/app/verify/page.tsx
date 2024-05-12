@@ -1,26 +1,31 @@
 'use client'
-import React, { useRef, ChangeEvent, KeyboardEvent } from 'react';
+import React, { useState, ChangeEvent, KeyboardEvent } from 'react';
 import { useRouter } from 'next/navigation';
 
 const Verify = () => {
   const router = useRouter();
-  const inputRefs: React.RefObject<HTMLInputElement>[] = [];
-  for (let i = 0; i < 8; i++) {
-    inputRefs[i] = useRef<HTMLInputElement>(null);
-  }
+  const [values, setValues] = useState<string[]>(new Array(8).fill(''));
 
   const handleInputChange = (index: number, e: ChangeEvent<HTMLInputElement>) => {
-    const input = e.target;
-    const value = input.value;
+    const { value } = e.target;
 
-    if (value.length >= 1) {
+    if (value.length === 1) {
       // Move focus to the next input
-      if (index < inputRefs.length - 1 && inputRefs[index + 1]?.current) {
-        inputRefs[index + 1]?.current?.focus();
+      if (index < values.length - 1) {
+        const newValues = [...values];
+        newValues[index] = value;
+        setValues(newValues);
+        const nextInput = e.target.nextElementSibling as HTMLInputElement;
+        if (nextInput) {
+          nextInput.focus();
+        }
       }
     }
   };
 
+  const handleKeyPress = (index: number, e: KeyboardEvent<HTMLInputElement>) => {
+    // Handle key press event if needed
+  };
 
   return (
     <div className="border h-verify-height rounded-xl flex flex-col items-center w-signup-width mx-auto mt-8">
@@ -29,14 +34,15 @@ const Verify = () => {
       <div className='my-4'>
         <div>Code</div>
         <div className='flex '>
-          {inputRefs.map((ref, index) => (
+          {values.map((value, index) => (
             <input
               key={index}
-              ref={ref}
               className='w-verify-box-width h-12 mr-2 border text-center rounded-md'
               type="text"
               maxLength={1} // Limit input to one character
+              value={value}
               onChange={(e) => handleInputChange(index, e)}
+              onKeyPress={(e) => handleKeyPress(index, e)}
             />
           ))}
         </div>
