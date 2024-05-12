@@ -1,3 +1,4 @@
+'use client'
 import React, { useRef, ChangeEvent, KeyboardEvent } from 'react';
 import { useRouter } from 'next/navigation';
 
