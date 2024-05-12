@@ -9,16 +9,15 @@ const Verify = () => {
   const handleInputChange = (index: number, e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
 
-    if (value.length === 1) {
-      // Move focus to the next input
-      if (index < values.length - 1) {
-        const newValues = [...values];
-        newValues[index] = value;
-        setValues(newValues);
-        const nextInput = e.target.nextElementSibling as HTMLInputElement;
-        if (nextInput) {
-          nextInput.focus();
-        }
+    const newValues = [...values];
+    newValues[index] = value;
+    setValues(newValues);
+
+    // Move focus to the next input
+    if (value.length === 1 && index < values.length - 1) {
+      const nextInput = e.target.nextElementSibling as HTMLInputElement;
+      if (nextInput) {
+        nextInput.focus();
       }
     }
   };
